@@ -7,7 +7,7 @@ import asyncio
 import discord
 
 
-load_dotenv()
+# load_dotenv()
 
 BOT_PREFIX = "!"
 TOKEN = os.getenv("SECRET_TOKEN")  # Get at discordapp.com/developers/applications/me
