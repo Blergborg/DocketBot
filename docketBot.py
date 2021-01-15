@@ -45,8 +45,7 @@ async def on_message(message):
     # remove a movie to the docket
     elif message.content.startswith(BOT_PREFIX + "remove"):
         movie = message.content.split(" ", maxsplit=1)[1].title()
-        docketRemove(movie)
-        await message.channel.send(movie + " removed from the docket.")
+        await message.channel.send(docketRemove(movie))
 
     # list all movies in the docket
     elif message.content.startswith(BOT_PREFIX + "docket"):
@@ -64,13 +63,17 @@ def docketAdd(movie):
 
 
 def docketRemove(movie):
-    with open("docket.txt") as docket:
+    with open("docket.txt", "r") as docket:
         lines = docket.readlines()
 
     with open("docket.txt", "w") as docket:
+        response = f"{movie} not found in the docket."
         for line in lines:
             if line.strip("\n") != movie:
                 docket.write(line)
+            else:
+                response = f"{movie} removed from the docket."
+        return response
 
 
 def docketPrint():
